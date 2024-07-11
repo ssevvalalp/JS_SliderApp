@@ -29,8 +29,67 @@ var models = [
     }  
     
 ];
+var index = 0;
+var slideCount = models.length;
 
-var index = 2;
+// showSlide(index);
+// document.querySelector('.fa-arrow-left').addEventListener('click', function() {
+//     index--;
+//     if (index < 0) {
+//         index = slideCount - 1;
+//     }
+//     showSlide(index);
+//     console.log(index);
+// });
+
+// document.querySelector('.fa-arrow-right').addEventListener('click', function() {
+//     index++;
+//     if (index >= slideCount) {
+//         index = 0;
+//     }
+//     showSlide(index);
+//     console.log(index);
+// });
+
+
+// function showSlide(index){
+    
+// document.querySelector('.card-title').textContent = models[index].name;
+// document.querySelector('.card-imp-top').setAttribute('src', models[index].image);
+// document.querySelector('.card-link').setAttribute('href', models[index].link);
+
+//OR
+
+showSlide(index);
+document.querySelector('.fa-arrow-left').addEventListener('click', function() {
+    index--;
+   
+    showSlide(index);
+    console.log(index);
+});
+
+document.querySelector('.fa-arrow-right').addEventListener('click', function() {
+    index++;
+   
+    showSlide(index);
+    console.log(index);
+});
+
+
+function showSlide(i){  // i dışarıdan gönderilen değer
+
+    index = i;
+    if (i < 0) {
+        index = slideCount - 1;
+    }
+    if (i >= slideCount) {
+        index = 0;
+    }
+    
 document.querySelector('.card-title').textContent = models[index].name;
 document.querySelector('.card-imp-top').setAttribute('src', models[index].image);
 document.querySelector('.card-link').setAttribute('href', models[index].link);
+
+}
+
+
