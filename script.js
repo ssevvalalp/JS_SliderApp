@@ -31,6 +31,12 @@ var models = [
 ];
 var index = 0;
 var slideCount = models.length;
+var interval;
+
+var settings = {
+    duration : '1000',
+    random : false
+}
 
 // showSlide(index);
 // document.querySelector('.fa-arrow-left').addEventListener('click', function() {
@@ -60,7 +66,8 @@ var slideCount = models.length;
 
 //OR
 
-showSlide(index);
+init(settings);
+
 document.querySelector('.fa-arrow-left').addEventListener('click', function() {
     index--;
    
@@ -74,6 +81,48 @@ document.querySelector('.fa-arrow-right').addEventListener('click', function() {
     showSlide(index);
     console.log(index);
 });
+
+document.querySelectorAll('.arrow').forEach(function(item) {
+    item.addEventListener('mouseenter', function(){
+        clearInterval(interval);
+    })
+});
+
+document.querySelectorAll('.arrow').forEach(function(item) {
+    item.addEventListener('mouseleave', function(){
+        init(settings);
+    })
+});
+
+function init(settingss){ //yukarıdaki objenin tutuldugu adres buraya aktarılacak
+    
+    var prev;
+    // setTimeout süre boyunca çalışır durur.
+    interval = setInterval(function(){
+        
+        if(settingss.random){
+            // random index
+            do{
+                index = Math.floor(Math.random() * slideCount)
+            }while(index == prev)
+            prev = index; //seçilmiş olan index bir sonraki aşamada önceki index olacak
+        }else{
+            //artan index
+
+            if(slideCount == index){
+                index = 0;
+            }
+            showSlide(index);
+            console.log(index);
+            index++;
+
+        }
+        // console.log(index);
+        showSlide(index);
+    },settingss.duration)
+}
+
+
 
 
 function showSlide(i){  // i dışarıdan gönderilen değer
